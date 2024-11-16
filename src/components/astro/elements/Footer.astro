@@ -1,0 +1,18 @@
+---
+import clsx from "clsx";
+
+import Section from "@/components/astro/elements/Section.astro";
+import Container from "@/components/astro/elements/Container.astro";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props as Props;
+---
+
+<Section tag="footer" class={clsx(className)}>
+  <Container>
+    <slot />
+  </Container>
+</Section>
