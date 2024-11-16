@@ -39,8 +39,8 @@ This is a starter template for building websites with Astro, Tailwind CSS, and T
 
 ## Building for Production
 
-To build your website for production, run:
+3. To build your website for production, run:
 
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
