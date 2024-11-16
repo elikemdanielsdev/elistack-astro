@@ -1,4 +1,5 @@
 ---
+import Header from "@/components/astro/elements/Header.astro";
 import Footer from "@/components/astro/elements/Footer.astro";
 
 interface Props {
@@ -19,9 +20,15 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="flex min-h-screen flex-col">
+    <!-- HEADER -->
+    <Header>
+      <p>Header</p>
+    </Header>
+    <!-- MAIN -->
     <main class="flex-grow">
       <slot />
     </main>
+    <!-- FOOTER -->
     <Footer>
       <p>Footer</p>
     </Footer>
