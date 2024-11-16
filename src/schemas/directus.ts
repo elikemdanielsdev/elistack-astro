@@ -14,4 +14,4 @@ if (!directusApiUrl) {
 
 const directus = createDirectus<Schema>(directusApiUrl).with(rest());
 
-export default directus;
+export { directus, directusApiUrl };

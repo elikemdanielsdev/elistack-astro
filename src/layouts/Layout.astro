@@ -1,10 +1,11 @@
 ---
-import directus from "@/schemas/directus";
+import { directus, directusApiUrl } from "@/schemas/directus";
 import { readSingleton } from "@directus/sdk";
 
 import Header from "@/components/astro/elements/Header.astro";
 import Footer from "@/components/astro/elements/Footer.astro";
 import SEO from "@/components/astro/elements/SEO.astro";
+import { Image } from "astro:assets";
 
 type Props = {
   title?: string;
@@ -16,15 +17,17 @@ type Props = {
 };
 
 const site = await directus.request(
-  readSingleton("global", { fields: ["name", "description"] }),
+  readSingleton("global", { fields: ["name", "description", "image"] }),
 );
 
+console.log(`/assets/${site.image}`);
+
 const {
-  title = site.name ?? "Elistack",
-  description = site.description,
+  title = site.name ? `${site.name} - ${site.description}` : "Elistack",
+  description = site.description ?? "Website development starter template",
   keywords = ["astro", "directus", "react", "tailwindcss"],
-  ogImage = "/og.png",
-  ogTitle = site.name ?? "Elistack",
+  ogImage = `${directusApiUrl}/assets/${site.image}` ?? "/og.png",
+  ogTitle = site.name ? `${site.name} - ${site.description}` : "Elistack",
   ogDescription = site.description ?? "Website development starter template",
 } = Astro.props as Props;
 ---
