@@ -14,7 +14,7 @@ const sizes = {
   "2xl": "max-w-screen-2xl",
 };
 
-const { size = "sm", class: className } = Astro.props as Props;
+const { size = "lg", class: className } = Astro.props as Props;
 ---
 
 <div class={clsx("mx-auto", sizes[size], className)}>

@@ -1,9 +1,8 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import directus from "@/schemas/directus";
 import { readSingleton } from "@directus/sdk";
-import { motion } from "motion/react";
-import { Apple } from "lucide-react";
+
+import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/astro/elements/Section.astro";
 import Container from "@/components/astro/elements/Container.astro";
 import Heading from "@/components/astro/elements/Heading.astro";
@@ -16,18 +15,7 @@ console.log(site);
 ---
 
 <Layout title={site.name}>
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    client:load
-    className="container mx-auto flex gap-2 rounded-lg bg-orange-200 p-4"
-  >
-    <Apple />
-    <h1>{site.name}</h1>
-    <p>{site.description}</p>
-  </motion.div>
-  <Section tag="header">
+  <Section>
     <Container>
       <Heading size="display-3">{site.name}</Heading>
     </Container>
