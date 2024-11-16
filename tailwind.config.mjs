@@ -2,7 +2,13 @@
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        "display-1": "clamp(1.75rem, 1.4375rem + 1.5625vw, 3rem)",
+        "display-2": "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)",
+        "display-3": "clamp(1.25rem, 1.125rem + 1vw, 2rem)",
+      },
+    },
   },
   plugins: [],
 };

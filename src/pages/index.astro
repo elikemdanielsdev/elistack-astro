@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Apple } from "lucide-react";
 import Section from "@/components/astro/elements/Section.astro";
 import Container from "@/components/astro/elements/Container.astro";
+import Heading from "@/components/astro/elements/Heading.astro";
 
 const site = await directus.request(
   readSingleton("global", { fields: ["name", "description"] }),
@@ -28,7 +29,7 @@ console.log(site);
   </motion.div>
   <Section tag="header">
     <Container>
-      <h1>{site.name}</h1>
+      <Heading size="display-3">{site.name}</Heading>
     </Container>
   </Section>
 </Layout>
