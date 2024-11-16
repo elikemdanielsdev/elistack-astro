@@ -20,12 +20,12 @@ const site = await directus.request(
 );
 
 const {
-  title = site.name ?? "Astro",
+  title = site.name ?? "Elistack",
   description = site.description,
-  keywords = ["astro", "keywords"],
+  keywords = ["astro", "directus", "react", "tailwindcss"],
   ogImage = "/og.png",
-  ogTitle = site.name ?? "Astro",
-  ogDescription = site.description ?? "Astro",
+  ogTitle = site.name ?? "Elistack",
+  ogDescription = site.description ?? "Website development starter template",
 } = Astro.props as Props;
 ---
 
@@ -36,7 +36,6 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <!-- SEO -->
     <SEO
       title={title}
       description={description}
@@ -46,17 +45,13 @@ const {
       ogDescription={ogDescription}
     />
   </head>
-  <!-- BODY -->
   <body class="flex min-h-screen flex-col">
-    <!-- HEADER -->
     <Header>
       <p>Header</p>
     </Header>
-    <!-- MAIN -->
     <main class="flex-grow">
       <slot />
     </main>
-    <!-- FOOTER -->
     <Footer>
       <p>Footer</p>
     </Footer>
