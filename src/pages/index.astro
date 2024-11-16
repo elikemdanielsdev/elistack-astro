@@ -4,7 +4,7 @@ import directus from "@/schemas/directus";
 import { readSingleton } from "@directus/sdk";
 import { motion } from "motion/react";
 import { Apple } from "lucide-react";
-import Sections from "@/components/astro/elements/Sections.astro";
+import Section from "@/components/astro/elements/Section.astro";
 import Container from "@/components/astro/elements/Container.astro";
 
 const site = await directus.request(
@@ -26,9 +26,9 @@ console.log(site);
     <h1>{site.name}</h1>
     <p>{site.description}</p>
   </motion.div>
-  <Sections tag="header">
+  <Section tag="header">
     <Container>
       <h1>{site.name}</h1>
     </Container>
-  </Sections>
+  </Section>
 </Layout>
