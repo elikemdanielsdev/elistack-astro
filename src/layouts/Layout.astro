@@ -5,7 +5,6 @@ import { readSingleton } from "@directus/sdk";
 import Header from "@/components/astro/elements/Header.astro";
 import Footer from "@/components/astro/elements/Footer.astro";
 import SEO from "@/components/astro/elements/SEO.astro";
-import { Image } from "astro:assets";
 
 type Props = {
   title?: string;
@@ -19,8 +18,6 @@ type Props = {
 const site = await directus.request(
   readSingleton("global", { fields: ["name", "description", "image"] }),
 );
-
-console.log(`/assets/${site.image}`);
 
 const {
   title = site.name ? `${site.name} - ${site.description}` : "Elistack",
