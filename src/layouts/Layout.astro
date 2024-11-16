@@ -1,24 +1,52 @@
 ---
+import directus from "@/schemas/directus";
+import { readSingleton } from "@directus/sdk";
+
 import Header from "@/components/astro/elements/Header.astro";
 import Footer from "@/components/astro/elements/Footer.astro";
+import SEO from "@/components/astro/elements/SEO.astro";
 
-interface Props {
-  title: string;
-}
+type Props = {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  ogImage?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+};
 
-const { title } = Astro.props;
+const site = await directus.request(
+  readSingleton("global", { fields: ["name", "description"] }),
+);
+
+const {
+  title = site.name ?? "Astro",
+  description = site.description,
+  keywords = ["astro", "keywords"],
+  ogImage = "/og.png",
+  ogTitle = site.name ?? "Astro",
+  ogDescription = site.description ?? "Astro",
+} = Astro.props as Props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <!-- SEO -->
+    <SEO
+      title={title}
+      description={description}
+      keywords={keywords}
+      ogImage={ogImage}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+    />
   </head>
+  <!-- BODY -->
   <body class="flex min-h-screen flex-col">
     <!-- HEADER -->
     <Header>
