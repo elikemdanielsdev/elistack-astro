@@ -1,0 +1,64 @@
+---
+import clsx from "clsx";
+import Section from "@/components/astro/elements/Section.astro";
+import Container from "@/components/astro/elements/Container.astro";
+import Heading from "@/components/astro/elements/Heading.astro";
+import Button from "@/components/astro/elements/Button.astro";
+import { Image } from "astro:assets";
+
+type Props = {
+  title?: string;
+  subtitle?: string;
+  class?: string;
+  button?: boolean;
+  buttonProps?: {
+    class?: string;
+    label?: string;
+  };
+  message?: string;
+  image?: string;
+};
+
+const {
+  title,
+  subtitle,
+  class: className,
+  button,
+  buttonProps,
+  message,
+  image,
+} = Astro.props as Props;
+---
+
+<Section class={clsx(className)}>
+  <Container size="md" class="grid place-items-center gap-4 text-center">
+    <Heading tag="h1" size="display-1" class="leading-[1.2]">{title}</Heading>
+    <Heading
+      tag="h2"
+      size="display-3"
+      weight="normal"
+      class="max-w-screen-sm text-xl">{subtitle}</Heading
+    >
+    {
+      button && (
+        <div class="mt-10 grid place-items-center gap-2">
+          <Button {...buttonProps}>{buttonProps?.label ?? "Button"}</Button>
+          <p class="text-sm">{message}</p>
+        </div>
+      )
+    }
+    <slot />
+  </Container>
+  {
+    image && (
+      <Container size="xl" class="mt-10">
+        <Image
+          inferSize
+          src={image}
+          alt="Hero"
+          class="w-full max-w-screen-xl"
+        />
+      </Container>
+    )
+  }
+</Section>

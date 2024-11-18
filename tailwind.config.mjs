@@ -8,7 +8,13 @@ export default {
         "display-2": "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)",
         "display-3": "clamp(1.25rem, 1.125rem + 1vw, 2rem)",
       },
+      screens: {
+        sm: "520px",
+        md: "600px",
+        lg: "700px",
+        xl: "1380px",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

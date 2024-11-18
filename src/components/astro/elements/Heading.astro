@@ -5,6 +5,16 @@ type Props = {
   class?: string;
   size?: keyof typeof sizes;
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  weight?: "thin" | "normal" | "medium" | "semibold" | "bold" | "extrabold";
+};
+
+const weights = {
+  thin: "font-thin",
+  normal: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+  bold: "font-bold",
+  extrabold: "font-extrabold",
 };
 
 const sizes = {
@@ -17,9 +27,10 @@ const {
   size = "display-1",
   tag: Tag = "h1",
   class: className,
+  weight = "bold",
 } = Astro.props as Props;
 ---
 
-<Tag class={clsx(sizes[size], className)}>
+<Tag class={clsx(sizes[size], weights[weight], className)}>
   <slot />
 </Tag>

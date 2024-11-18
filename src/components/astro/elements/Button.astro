@@ -1,0 +1,13 @@
+---
+import clsx from "clsx";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props as Props;
+---
+
+<button class={clsx("btn btn-primary rounded-full", className)}>
+  <slot />
+</button>

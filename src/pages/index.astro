@@ -3,15 +3,18 @@ import { directus } from "@/schemas/directus";
 import { readSingleton } from "@directus/sdk";
 
 import Layout from "@/layouts/Layout.astro";
-import Section from "@/components/astro/elements/Section.astro";
-import Container from "@/components/astro/elements/Container.astro";
-import Heading from "@/components/astro/elements/Heading.astro";
+import Hero from "@/components/astro/sections/Hero.astro";
 ---
 
 <Layout>
-  <Section>
-    <Container>
-      <Heading size="display-1">Something nice</Heading>
-    </Container>
-  </Section>
+  <Hero
+    title="I make websites for busy professionals and startups"
+    subtitle="Easily design expressive animations. Add effects with a few clicks and capture your audience’s attention when they land on your website."
+    button
+    buttonProps={{
+      label: "Book a call",
+    }}
+    message="It’s a free 30 min chat."
+    image="https://images.unsplash.com/photo-1667230688063-41c514b0a5f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzF8fHNpdHRpbmclMjBvbiUyMGhpbGx8ZW58MHx8MHx8fDA%3D"
+  />
 </Layout>
