@@ -1,27 +1,31 @@
 ---
-import clsx from "clsx";
-import Section from "@/components/astro/elements/Section.astro";
-import Container from "@/components/astro/elements/Container.astro";
-import Heading from "@/components/astro/elements/Heading.astro";
-import Button from "@/components/astro/elements/Button.astro";
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import { directus } from "@/schemas/directus";
+import { readSingleton } from "@directus/sdk";
+
 import ErrorImage from "@/assets/images/error-image.png";
 import ErrorLayout from "@/layouts/ErrorLayout.astro";
 import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
+
+const error = await directus.request(
+  readSingleton("global", {
+    fields: ["hero_title", "hero_subtitle", "hero_button_label", "hero_image"],
+  }),
+);
+
+console.log(error);
 ---
 
 <ErrorLayout>
   <HeroPrimary
-    title="Sorry to see you here"
-    subtitle="It’s possible the page you’re looking for has been archived, deleted or was never created."
+    title={error.hero_title}
+    subtitle={error.hero_subtitle}
     button
     buttonProps={{
       class: "px-10 h-auto py-7",
-      label: "Return home",
+      label: error.hero_button_label,
       size: "lg",
     }}
     message="It’s a short click back."
-    image={ErrorImage}
+    image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${error.hero_image}`}
   />
 </ErrorLayout>

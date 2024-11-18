@@ -5,7 +5,6 @@ import Container from "@/components/astro/elements/Container.astro";
 import Heading from "@/components/astro/elements/Heading.astro";
 import Button from "@/components/astro/elements/Button.astro";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 
 type Props = {
   title?: string;
@@ -18,7 +17,7 @@ type Props = {
     size?: "xs" | "sm" | "md" | "lg";
   };
   message?: string;
-  image?: ImageMetadata;
+  image?: string;
 };
 
 const {
@@ -49,14 +48,12 @@ const {
         </div>
       )
     }
-    <slot />
   </Container>
   {
     image && (
       <Container size="xl" class="mt-32">
         <Image
-          width={1920}
-          height={1080}
+          inferSize={true}
           src={image}
           alt="Hero"
           class="w-full max-w-screen-xl"

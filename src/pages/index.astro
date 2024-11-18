@@ -4,20 +4,49 @@ import { readSingleton } from "@directus/sdk";
 
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
-import HeroImage from "@/assets/images/hero-image.png";
+import Container from "@/components/astro/elements/Container.astro";
+import Section from "@/components/astro/elements/Section.astro";
+import Heading from "@/components/astro/elements/Heading.astro";
+import { Image } from "astro:assets";
+
+const home = await directus.request(
+  readSingleton("home", {
+    fields: [
+      "hero_title",
+      "hero_subtitle",
+      "hero_button_label",
+      "hero_image",
+      "content",
+    ],
+  }),
+);
 ---
 
 <MainLayout>
   <HeroPrimary
-    title="I make websites for busy professionals and startups"
-    subtitle="Easily design expressive animations. Add effects with a few clicks and capture your audience’s attention when they land on your website."
+    title={home.hero_title}
+    subtitle={home.hero_subtitle}
     button
     buttonProps={{
       class: "bg-gray-950 hover:bg-gray-800 text-white px-10 h-auto py-7",
-      label: "Book a call",
+      label: home.hero_button_label,
       size: "lg",
     }}
     message="It’s a free 30 min chat."
-    image={HeroImage}
+    image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${home.hero_image}`}
   />
+  <Section>
+    <Container size="md" class="grid place-items-center gap-4 text-center">
+      <Heading tag="h2" size="display-3">Startups I've worked with</Heading>
+      <p class="max-w-screen-sm text-xl">
+        Easily design expressive animations. Add effects with a few clicks and
+        capture your audience’s attention when they land on your website.
+      </p>
+    </Container>
+    <Container size="md" class="mt-10 rounded-[32px] bg-gray-100 p-2">
+      <div class="prose rounded-[24px] bg-white p-10">
+        {home.content && <Fragment set:html={home.content} />}
+      </div>
+    </Container>
+  </Section>
 </MainLayout>
