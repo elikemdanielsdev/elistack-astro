@@ -3,11 +3,19 @@ import clsx from "clsx";
 
 type Props = {
   class?: string;
+  size?: "xs" | "sm" | "md" | "lg";
 };
 
-const { class: className } = Astro.props as Props;
+const sizes = {
+  xs: "btn-xs",
+  sm: "btn-sm",
+  md: "btn-md",
+  lg: "btn-lg",
+};
+
+const { size = "md", class: className } = Astro.props as Props;
 ---
 
-<button class={clsx("btn btn-primary rounded-full", className)}>
+<button class={clsx("btn btn-primary rounded-full", sizes[size], className)}>
   <slot />
 </button>

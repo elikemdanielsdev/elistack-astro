@@ -3,16 +3,64 @@ import clsx from "clsx";
 
 import Section from "@/components/astro/elements/Section.astro";
 import Container from "@/components/astro/elements/Container.astro";
+import Link from "@/components/astro/elements/Link.astro";
 
 type Props = {
   class?: string;
 };
 
 const { class: className } = Astro.props as Props;
+const currentPath = Astro.url.pathname;
 ---
 
-<Section tag="header" class={clsx(className)}>
-  <Container>
-    <slot />
+<Section tag="header" class="py-6">
+  <Container class="grid grid-cols-3 items-center gap-6">
+    <Link href="/"> Elikem Daniels </Link>
+    <nav class="mx-auto flex items-center gap-6 rounded-full bg-gray-100 p-2">
+      <Link
+        href="/"
+        class={clsx(
+          "rounded-full px-4 py-2 leading-none",
+          currentPath === "/" && "bg-white shadow-sm",
+        )}
+      >
+        Start
+      </Link>
+    </nav>
+
+    <!-- Current time in Accra -->
+    <time id="current-time" class="ml-auto"></time>
   </Container>
 </Section>
+
+<script>
+  // Function to update the time
+  function updateTime() {
+    const timeElement = document.getElementById("current-time");
+
+    if (!timeElement) return;
+
+    const now = new Date();
+
+    // Convert to Accra (Ghana) time - GMT by default
+    const options = {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true, // To show AM/PM
+      timeZone: "Africa/Accra", // Ghana's timezone
+    };
+
+    const formatter = new Intl.DateTimeFormat("en-US", options as any);
+    const formattedTime = formatter.format(now);
+
+    // Update the element with the label "Time:" and the formatted time
+    timeElement.textContent = `Accra : ${formattedTime}`;
+  }
+
+  // Update the time every second
+  setInterval(updateTime, 1000);
+
+  // Call it once to set the initial time
+  updateTime();
+</script>

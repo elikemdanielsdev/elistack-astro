@@ -5,6 +5,7 @@ import Container from "@/components/astro/elements/Container.astro";
 import Heading from "@/components/astro/elements/Heading.astro";
 import Button from "@/components/astro/elements/Button.astro";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 type Props = {
   title?: string;
@@ -14,9 +15,10 @@ type Props = {
   buttonProps?: {
     class?: string;
     label?: string;
+    size?: "xs" | "sm" | "md" | "lg";
   };
   message?: string;
-  image?: string;
+  image?: ImageMetadata;
 };
 
 const {
@@ -30,7 +32,7 @@ const {
 } = Astro.props as Props;
 ---
 
-<Section class={clsx(className)}>
+<Section class="py-20">
   <Container size="md" class="grid place-items-center gap-4 text-center">
     <Heading tag="h1" size="display-1" class="leading-[1.2]">{title}</Heading>
     <Heading
@@ -41,7 +43,7 @@ const {
     >
     {
       button && (
-        <div class="mt-10 grid place-items-center gap-2">
+        <div class="mt-10 grid place-items-center gap-3">
           <Button {...buttonProps}>{buttonProps?.label ?? "Button"}</Button>
           <p class="text-sm">{message}</p>
         </div>
@@ -51,9 +53,10 @@ const {
   </Container>
   {
     image && (
-      <Container size="xl" class="mt-10">
+      <Container size="xl" class="mt-32">
         <Image
-          inferSize
+          width={1920}
+          height={1080}
           src={image}
           alt="Hero"
           class="w-full max-w-screen-xl"

@@ -1,0 +1,59 @@
+---
+import { directus, directusApiUrl } from "@/schemas/directus";
+import { readSingleton } from "@directus/sdk";
+
+import Header from "@/components/astro/elements/Header.astro";
+import Footer from "@/components/astro/elements/Footer.astro";
+import SEO from "@/components/astro/elements/SEO.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  ogImage?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+};
+
+const site = await directus.request(
+  readSingleton("global", { fields: ["name", "description", "image"] }),
+);
+
+const {
+  title = site.name ? `${site.name} - ${site.description}` : "Elistack",
+  description = site.description ?? "Website development starter template",
+  keywords = ["astro", "directus", "react", "tailwindcss"],
+  ogImage = `${directusApiUrl}/assets/${site.image}`,
+  ogTitle = site.name ? `${site.name} - ${site.description}` : "Elistack",
+  ogDescription = site.description ?? "Website development starter template",
+} = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title={title}
+      description={description}
+      keywords={keywords}
+      ogImage={ogImage}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+    />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header>
+      <p>Header</p>
+    </Header>
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer>
+      <p>Footer</p>
+    </Footer>
+  </body>
+</html>

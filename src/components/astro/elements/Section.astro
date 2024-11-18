@@ -9,6 +9,6 @@ type Props = {
 const { tag: Tag = "section", class: className } = Astro.props as Props;
 ---
 
-<Tag class={clsx("px-[4%]", className)}>
+<Tag class={clsx("px-[4%] py-20", className)}>
   <slot />
 </Tag>
