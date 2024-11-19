@@ -7,9 +7,10 @@ import Button from "@/components/astro/elements/Button.astro";
 import { Image } from "astro:assets";
 
 type Props = {
+  class?: string;
   title?: string;
   subtitle?: string;
-  class?: string;
+  date?: string;
   button?: boolean;
   buttonProps?: {
     class?: string;
@@ -18,28 +19,44 @@ type Props = {
   };
   message?: string;
   image?: string;
+  featured_image?: string;
+  alt?: string;
 };
 
 const {
+  class: className,
   title,
   subtitle,
-  class: className,
+  date,
   button,
   buttonProps,
   message,
   image,
+  featured_image,
+  alt,
 } = Astro.props as Props;
 ---
 
-<Section class="py-20">
+<Section class={clsx(className)}>
   <Container size="md" class="grid place-items-center gap-4 text-center">
+    <!-- Title -->
     <Heading tag="h1" size="display-1" class="leading-[1.2]">{title}</Heading>
-    <Heading
-      tag="h2"
-      size="display-3"
-      weight="normal"
-      class="max-w-screen-sm text-xl">{subtitle}</Heading
-    >
+    <!-- Subtitle -->
+    {
+      subtitle && (
+        <Heading
+          tag="h2"
+          size="display-3"
+          weight="normal"
+          class="max-w-screen-sm text-xl"
+        >
+          {subtitle}
+        </Heading>
+      )
+    }
+    <!-- Date -->
+    {date && <time datetime={date}>{date}</time>}
+    <!-- Button -->
     {
       button && (
         <div class="mt-10 grid place-items-center gap-3">
@@ -49,16 +66,34 @@ const {
       )
     }
   </Container>
-  {
-    image && (
-      <Container size="xl" class="mt-32">
-        <Image
-          inferSize={true}
-          src={image}
-          alt="Hero"
-          class="w-full max-w-screen-xl"
-        />
-      </Container>
-    )
-  }
+  <!-- Image -->
+  <Fragment>
+    {
+      image && (
+        <Container size="xl" class="mt-32">
+          <Image
+            width={1200}
+            height={1200}
+            src={image}
+            alt={alt ?? ""}
+            class="h-auto w-full"
+          />
+        </Container>
+      )
+    }
+    <!-- Featured Image -->
+    {
+      featured_image && (
+        <Container size="xl" class="mt-32 overflow-hidden rounded-[32px]">
+          <Image
+            width={1200}
+            height={1200}
+            src={featured_image}
+            alt={alt ?? ""}
+            class="aspect-[1400/900] w-full object-cover"
+          />
+        </Container>
+      )
+    }
+  </Fragment>
 </Section>

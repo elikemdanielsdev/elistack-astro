@@ -9,10 +9,24 @@ export default {
         "display-3": "clamp(1.25rem, 1.125rem + 1vw, 2rem)",
       },
       screens: {
-        sm: "520px",
+        sm: "510px",
         md: "600px",
         lg: "700px",
         xl: "1380px",
+      },
+      animation: {
+        marquee: "marquee 25s linear infinite",
+        marquee2: "marquee2 25s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
       },
     },
   },

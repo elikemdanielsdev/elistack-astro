@@ -3,7 +3,7 @@ import { directus, directusApiUrl } from "@/schemas/directus";
 import { readSingleton } from "@directus/sdk";
 
 import Header from "@/components/astro/elements/Header.astro";
-import Footer from "@/components/astro/elements/Footer.astro";
+import Footer from "@/components/astro/sections/Footer.astro";
 import SEO from "@/components/astro/elements/SEO.astro";
 
 type Props = {
@@ -52,8 +52,16 @@ const {
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer>
-      <p>Footer</p>
-    </Footer>
+    <Footer
+      title="Let's connect"
+      subtitle="Book a 30-minute call with me to discuss your web project, and find out how I could be of help."
+      button
+      buttonProps={{
+        class: "text-white px-10 h-auto py-7",
+        label: "Book a call",
+        size: "lg",
+      }}
+      message="It’s a free 30 min chat."
+    />
   </body>
 </html>

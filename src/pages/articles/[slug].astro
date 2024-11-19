@@ -1,0 +1,51 @@
+---
+import { directus } from "@/schemas/directus";
+import { readItems } from "@directus/sdk";
+
+import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
+import MainLayout from "@/layouts/MainLayout.astro";
+import { Image } from "astro:assets";
+import Section from "@/components/astro/elements/Section.astro";
+import Container from "@/components/astro/elements/Container.astro";
+
+export async function getStaticPaths() {
+  const articles = await directus.request(
+    readItems("articles", {
+      fields: [
+        "title",
+        "slug",
+        "featured_image",
+        "image_description",
+        "content",
+      ],
+    }),
+  );
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: article,
+  }));
+}
+const { title, slug, featured_image, image_description, content } = Astro.props;
+---
+
+<MainLayout>
+  <HeroPrimary
+    class="pb-0"
+    title={title}
+    subtitle={slug}
+    featured_image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${featured_image}`}
+    alt={image_description ?? ""}
+  />
+
+  <Section>
+    <Container size="md" class="mt-10 rounded-[32px] bg-gray-100 p-2">
+      {
+        content && (
+          <div class="prose rounded-[24px] bg-white p-10">
+            <Fragment set:html={content} />
+          </div>
+        )
+      }
+    </Container>
+  </Section>
+</MainLayout>

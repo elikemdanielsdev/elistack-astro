@@ -1,11 +1,13 @@
 import { createDirectus, rest } from "@directus/sdk";
 import type { Global } from "./_global";
 import type { Home } from "./_home";
+import type { Article } from "./_articles";
 
 // Schema for the Directus API
 type Schema = {
   global: Global;
   home: Home;
+  articles: Article[];
 };
 
 const directusApiUrl = import.meta.env.DIRECTUS_API_ENDPOINT;
