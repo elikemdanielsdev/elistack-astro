@@ -16,6 +16,10 @@ const navItems: NavItem[] = [
     name: "Showcase",
     href: "/showcase",
   },
+  {
+    name: "Contact",
+    href: "/contact",
+  },
 ];
 
 export default navItems;
