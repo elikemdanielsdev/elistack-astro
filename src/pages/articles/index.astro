@@ -1,9 +1,13 @@
 ---
+import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 ---
 
 <MainLayout>
-  <article>
-    <h3>Hello from articles page</h3>
-  </article>
+  <HeroPrimary
+    title="Articles"
+    subtitle="Articles"
+    class="pb-10"
+    featured_image="https://images.unsplash.com/photo-1732008209481-3f5eed6b4ab5?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  />
 </MainLayout>
