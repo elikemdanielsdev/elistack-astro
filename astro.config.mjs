@@ -8,7 +8,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   image: {
-    domains: ["elikem-directus.up.railway.app", "images.unsplash.com"],
+    domains: ["cms.elikemdaniels.dev", "images.unsplash.com"],
   },
   integrations: [tailwind(), react()],
 });
