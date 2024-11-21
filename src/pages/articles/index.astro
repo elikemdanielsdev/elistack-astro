@@ -10,7 +10,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
 
 const articles = await directus.request(
   readItems("articles", {
-    fields: ["title", "slug"],
+    fields: ["title", "slug", "published_date"],
   }),
 );
 ---

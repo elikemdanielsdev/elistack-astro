@@ -13,6 +13,7 @@ export async function getStaticPaths() {
       fields: [
         "title",
         "slug",
+        "published_date",
         "featured_image",
         "image_description",
         "content",
@@ -24,14 +25,27 @@ export async function getStaticPaths() {
     props: article,
   }));
 }
-const { title, slug, featured_image, image_description, content } = Astro.props;
+const {
+  title,
+  slug,
+  published_date,
+  featured_image,
+  image_description,
+  content,
+} = Astro.props;
 ---
 
 <MainLayout>
   <HeroPrimary
     class="pb-0"
     title={title}
-    subtitle={slug}
+    date={published_date
+      ? new Date(published_date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : ""}
     featured_image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${featured_image}`}
     alt={image_description ?? ""}
   />
