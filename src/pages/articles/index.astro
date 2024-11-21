@@ -1,8 +1,35 @@
 ---
+import { directus } from "@/schemas/directus";
+import { readItems } from "@directus/sdk";
+
+import Container from "@/components/astro/elements/Container.astro";
+import ArticleCard from "@/components/astro/elements/ArticleCard.astro";
+import Section from "@/components/astro/elements/Section.astro";
 import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
+
+const articles = await directus.request(
+  readItems("articles", {
+    fields: ["title", "slug"],
+  }),
+);
 ---
 
 <MainLayout>
-  <HeroPrimary title="Articles" subtitle="Articles" class="pb-10" />
+  <HeroPrimary
+    title="Articles"
+    subtitle="Articles"
+    class="pb-10"
+  /><!-- Articles -->
+  <Section class="pb-40">
+    <Container size="md" class="mt-10 rounded-[32px] bg-gray-100 p-2">
+      <div class="grid gap-2 rounded-[24px]">
+        {
+          articles.map((article) => (
+            <ArticleCard title={article.title} slug={article.slug} />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
 </MainLayout>

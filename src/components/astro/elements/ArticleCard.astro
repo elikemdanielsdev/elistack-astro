@@ -1,0 +1,22 @@
+---
+import clsx from "clsx";
+
+type Props = {
+  class?: string;
+  title?: string;
+  slug?: string;
+};
+
+const { class: className, title, slug } = Astro.props as Props;
+---
+
+<article class={clsx("grid gap-2 rounded-[24px] bg-white p-10", className)}>
+  <div>
+    <!-- <time datetime={startDate}>{startDate}</time> - <time datetime={endDate}
+      >{endDate}</time
+    > -->
+  </div>
+  <a href={`/articles/${slug}`}>
+    <h3 class="text-[22px] font-bold">{title}</h3>
+  </a>
+</article>
