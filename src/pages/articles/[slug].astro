@@ -6,6 +6,7 @@ import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 import Section from "@/components/astro/elements/Section.astro";
 import Container from "@/components/astro/elements/Container.astro";
+import { formattedDate } from "@/utils/formattedDate";
 
 export async function getStaticPaths() {
   const articles = await directus.request(
@@ -39,13 +40,7 @@ const {
   <HeroPrimary
     class="pb-0"
     title={title}
-    date={published_date
-      ? new Date(published_date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : ""}
+    date={published_date ? formattedDate(published_date) : ""}
     featured_image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${featured_image}`}
     alt={image_description ?? ""}
   />
