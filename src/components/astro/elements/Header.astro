@@ -6,19 +6,13 @@ import Container from "@/components/astro/elements/Container.astro";
 import Link from "@/components/astro/elements/Link.astro";
 import navItems from "@/utils/nav";
 
-type Props = {
-  // class?: string;
-};
-
-// const { class: className } = Astro.props as Props;
 const currentPath = Astro.url.pathname;
-console.log(currentPath);
 ---
 
 <Section tag="header" class="py-6">
   <Container class="grid grid-cols-3 items-center gap-6">
     <Link href="/"> Elikem Daniels </Link>
-    {/* Navigation */}
+    <!-- Navigation -->
     <nav class="mx-auto flex items-center gap-2 rounded-full bg-gray-100 p-2">
       {
         navItems.map(({ href, name }) => (
@@ -26,7 +20,7 @@ console.log(currentPath);
             href={href}
             class={clsx(
               "rounded-full px-4 py-3 leading-none transition duration-300 hover:bg-gray-200/80",
-              href === currentPath &&
+              currentPath.startsWith(href) &&
                 "bg-white font-medium shadow-sm hover:bg-white/100",
             )}
           >
