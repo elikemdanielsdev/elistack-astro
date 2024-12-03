@@ -1,5 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
+
+const nominations = await getCollection("nominations");
 ---
 
 <MainLayout>
