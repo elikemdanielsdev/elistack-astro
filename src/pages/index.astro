@@ -7,4 +7,18 @@ const nominations = await getCollection("nominations");
 
 <MainLayout>
   <h1>Hello</h1>
+  <ul>
+    {
+      nominations.map(
+        (nomination: {
+          data: { name: string; type: string; year: number };
+        }) => (
+          <li>
+            {nomination.data.name} - {nomination.data.type} -{" "}
+            {nomination.data.year}
+          </li>
+        ),
+      )
+    }
+  </ul>
 </MainLayout>
