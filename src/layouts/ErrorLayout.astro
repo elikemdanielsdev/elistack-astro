@@ -1,7 +1,4 @@
 ---
-import { directus, directusApiUrl } from "@/schemas/directus";
-import { readSingleton } from "@directus/sdk";
-
 import SEO from "@/components/astro/elements/SEO.astro";
 
 type Props = {
@@ -13,17 +10,13 @@ type Props = {
   ogDescription?: string;
 };
 
-const site = await directus.request(
-  readSingleton("global", { fields: ["name", "description", "image"] }),
-);
-
 const {
-  title = site.name ? `Page not found - ${site.name}` : "Page not found",
-  description = site.description ?? "Website development starter template",
+  title = "Page not found",
+  description = "Website development starter template",
   keywords = ["astro", "directus", "react", "tailwindcss"],
-  ogImage = `${directusApiUrl}/assets/${site.image}`,
-  ogTitle = site.name ? `${site.name} - ${site.description}` : "Elistack",
-  ogDescription = site.description ?? "Website development starter template",
+  ogImage = "",
+  ogTitle = "Elistack",
+  ogDescription = "Website development starter template",
 } = Astro.props as Props;
 ---
 
@@ -43,7 +36,9 @@ const {
       ogDescription={ogDescription}
     />
   </head>
-  <body class="flex min-h-screen flex-col overflow-hidden">
+  <body
+    class="flex min-h-screen flex-col overflow-hidden scroll-smooth antialiased"
+  >
     <main class="flex-grow">
       <slot />
     </main>
