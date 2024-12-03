@@ -16,6 +16,6 @@ const sizes = {
 const { size = "md", class: className } = Astro.props as Props;
 ---
 
-<button class={clsx("btn btn-primary rounded-full", sizes[size], className)}>
+<button class={clsx("btn rounded-full", sizes[size], className)}>
   <slot />
 </button>

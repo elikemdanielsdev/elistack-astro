@@ -1,7 +1,4 @@
 ---
-import { directus, directusApiUrl } from "@/schemas/directus";
-import { readSingleton } from "@directus/sdk";
-
 import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/astro/elements/Header.astro";
 import Footer from "@/components/astro/sections/Footer.astro";
@@ -16,17 +13,13 @@ type Props = {
   ogDescription?: string;
 };
 
-const site = await directus.request(
-  readSingleton("global", { fields: ["name", "description", "image"] }),
-);
-
 const {
-  title = site.name ? `${site.name} - ${site.description}` : "Elistack",
-  description = site.description ?? "Website development starter template",
+  title = "Elistack",
+  description = "Website development starter template",
   keywords = ["astro", "directus", "react", "tailwindcss"],
-  ogImage = `${directusApiUrl}/assets/${site.image}`,
-  ogTitle = site.name ? `${site.name} - ${site.description}` : "Elistack",
-  ogDescription = site.description ?? "Website development starter template",
+  ogImage = "",
+  ogTitle = "Elistack",
+  ogDescription = "Website development starter template",
 } = Astro.props as Props;
 ---
 
@@ -47,23 +40,9 @@ const {
     />
     <ViewTransitions />
   </head>
-  <body class="flex min-h-screen flex-col">
-    <Header>
-      <p>Header</p>
-    </Header>
+  <body class="flex min-h-screen flex-col scroll-smooth antialiased">
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer
-      title="Let's connect"
-      subtitle="Book a 30-minute call with me to discuss your web project, and find out how I could be of help."
-      button
-      buttonProps={{
-        class: "text-white px-10 h-auto py-7",
-        label: "Book a call",
-        size: "lg",
-      }}
-      message="It’s a free 30 min chat."
-    />
   </body>
 </html>

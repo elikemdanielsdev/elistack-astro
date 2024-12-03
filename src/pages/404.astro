@@ -1,28 +1,7 @@
 ---
-import { directus } from "@/schemas/directus";
-import { readSingleton } from "@directus/sdk";
-
 import ErrorLayout from "@/layouts/ErrorLayout.astro";
-import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
-
-const error = await directus.request(
-  readSingleton("global", {
-    fields: ["hero_title", "hero_subtitle", "hero_button_label", "hero_image"],
-  }),
-);
 ---
 
 <ErrorLayout>
-  <HeroPrimary
-    title={error.hero_title}
-    subtitle={error.hero_subtitle}
-    button
-    buttonProps={{
-      class: "px-10 h-auto py-7",
-      label: error.hero_button_label,
-      size: "lg",
-    }}
-    message="It’s a single-click back."
-    image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${error.hero_image}`}
-  />
+  <h1>404</h1>
 </ErrorLayout>

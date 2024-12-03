@@ -1,90 +1,12 @@
 ---
-import { directus } from "@/schemas/directus";
-import { readSingleton } from "@directus/sdk";
-
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroPrimary from "@/components/astro/sections/HeroPrimary.astro";
 import Container from "@/components/astro/elements/Container.astro";
 import Section from "@/components/astro/elements/Section.astro";
 import Heading from "@/components/astro/elements/Heading.astro";
 import ExperienceCard from "@/components/astro/elements/ExperienceCard.astro";
-
-const home = await directus.request(
-  readSingleton("home", {
-    fields: [
-      "hero_title",
-      "hero_subtitle",
-      "hero_button_label",
-      "hero_image",
-      "content",
-    ],
-  }),
-);
 ---
 
 <MainLayout>
-  <HeroPrimary
-    title={home.hero_title}
-    subtitle={home.hero_subtitle}
-    button
-    buttonProps={{
-      class: "bg-gray-950 hover:bg-gray-800 text-white px-10 h-auto py-7",
-      label: home.hero_button_label,
-      size: "lg",
-    }}
-    message="It’s a free 30 min chat."
-    image={`${import.meta.env.DIRECTUS_API_ENDPOINT}/assets/${home.hero_image}`}
-    class="pb-10"
-  />
-  <!-- Bio -->
-  <Section>
-    <Container size="md" class="grid place-items-center gap-4 text-center">
-      <Heading tag="h2" size="display-3">Startups I've worked with</Heading>
-      <p class="max-w-screen-sm text-xl">
-        Easily design expressive animations. Add effects with a few clicks and
-        capture your audience’s attention when they land on your website.
-      </p>
-    </Container>
-    <Container size="md" class="mt-10 rounded-[32px] bg-gray-100 p-2">
-      {
-        home.content && (
-          <div class="prose rounded-[24px] bg-white p-10">
-            <Fragment set:html={home.content} />
-          </div>
-        )
-      }
-    </Container>
-  </Section>
-  <!-- Experience -->
-  <Section class="pb-40">
-    <Container size="md" class="grid place-items-center gap-4 text-center">
-      <Heading tag="h2" size="display-3">Startups I've worked with</Heading>
-      <p class="max-w-screen-sm text-xl">
-        Easily design expressive animations. Add effects with a few clicks and
-        capture your audience’s attention when they land on your website.
-      </p>
-    </Container>
-    <Container size="md" class="mt-10 rounded-[32px] bg-gray-100 p-2">
-      <div class="grid gap-2 rounded-[24px]">
-        <ExperienceCard
-          company="Elistack"
-          location="London - Remote"
-          startDate="2022"
-          endDate="Present"
-        />
-        <ExperienceCard
-          company="Chipper Cash"
-          location="Tokyo - On site"
-          startDate="2022"
-          endDate="Present"
-        />
-        <ExperienceCard
-          company="Vodafone"
-          location="Accra - On site"
-          startDate="2022"
-          endDate="Present"
-        />
-      </div>
-    </Container>
-  </Section>
+  <h1>Hello</h1>
 </MainLayout>
